@@ -1,6 +1,10 @@
 package chapter1
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/apbgo/go-study-group/chapter1/lib"
+)
 
 // Calc opには+,-,×,÷の4つが渡ってくることを想定してxとyについて計算して返却(正常時はerrorはnilでよい)
 // 想定していないopが渡って来た時には0とerrorを返却
@@ -32,8 +36,11 @@ func StringEncode(str string) string {
 	// chapter1/libのToCamelとToSnakeを使うこと
 
 	// TODO Q2
-
-	return ""
+	if len(str) <= 5 {
+		return lib.ToCamel(str)
+	} else {
+		return lib.ToSnake(str)
+	}
 }
 
 // Sqrt 数値xが与えられたときにz²が最もxに近い数値zを返却
