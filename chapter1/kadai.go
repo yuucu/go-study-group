@@ -119,6 +119,10 @@ func SumFromFileNumber(filePath string) (int, error) {
 		}
 		sum += input_num
 	}
+	// ファイルの終端に達したか
+	if err := sc.Err(); err != nil {
+		return 0, err
+	}
 
 	return sum, nil
 }
