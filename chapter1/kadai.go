@@ -2,6 +2,7 @@ package chapter1
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/apbgo/go-study-group/chapter1/lib"
 )
@@ -62,8 +63,18 @@ func Pyramid(x int) string {
 	// int -> stringはstrconv.Ioa() https://golang.org/pkg/strconv/#Itoa
 
 	// TODO Q4
+	ret := ""
+	for col := 0; col < x; col++ {
+		for row := 0; row <= col; row++ {
+			ret += strconv.Itoa(row + 1)
+		}
+		// 最後以外改行を加える
+		if col != x-1 {
+			ret += "\n"
+		}
+	}
 
-	return ""
+	return ret
 }
 
 // StringSum x,yをintにキャストし合計値を返却 (正常終了時、errorはnilでよい)
