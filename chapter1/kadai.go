@@ -84,10 +84,16 @@ func StringSum(x, y string) (int, error) {
 
 	// ヒント：string <-> intにはstrconvを使う
 	// string -> intはstrconv.Atoi() https://golang.org/pkg/strconv/#Atoi
+	xint, err := strconv.Atoi(x)
+	if err != nil {
+		return 0, err
+	}
+	yint, err := strconv.Atoi(y)
+	if err != nil {
+		return 0, err
+	}
+	return xint + yint, nil
 
-	// TODO Q5
-
-	return 0, nil
 }
 
 // SumFromFileNumber ファイルを開いてそこに記載のある数字の和を返却
