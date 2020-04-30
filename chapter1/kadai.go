@@ -1,7 +1,9 @@
 package chapter1
 
 import (
+	"bufio"
 	"errors"
+	"os"
 	"strconv"
 
 	"github.com/apbgo/go-study-group/chapter1/lib"
@@ -102,6 +104,21 @@ func SumFromFileNumber(filePath string) (int, error) {
 	// bufio.Scannerなどで１行ずつ読み込むと良い
 
 	// TODO Q6 オプション
+	file, err := os.Open("./test/numbers.txt")
+	if err != nil {
+		return 0, nil
+	}
+	defer file.Close()
 
-	return 0, nil
+	sum := 0
+	sc := bufio.NewScanner(file)
+	for sc.Scan() {
+		input_num, err := strconv.Atoi(sc.Text())
+		if err != nil {
+			return 0, err
+		}
+		sum += input_num
+	}
+
+	return sum, nil
 }
