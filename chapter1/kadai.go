@@ -63,6 +63,7 @@ func Pyramid(x int) string {
 	// int -> stringはstrconv.Ioa() https://golang.org/pkg/strconv/#Itoa
 
 	// TODO Q4
+	// strings.Builderを使ったほうが早いらしい
 	ret := ""
 	for col := 0; col < x; col++ {
 		for row := 0; row <= col; row++ {
