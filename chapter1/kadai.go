@@ -1,5 +1,7 @@
 package chapter1
 
+import "errors"
+
 // Calc opには+,-,×,÷の4つが渡ってくることを想定してxとyについて計算して返却(正常時はerrorはnilでよい)
 // 想定していないopが渡って来た時には0とerrorを返却
 func Calc(op string, x, y int) (int, error) {
@@ -9,8 +11,19 @@ func Calc(op string, x, y int) (int, error) {
 	// https://golang.org/pkg/fmt/#Errorf
 
 	// TODO Q1
+	switch op {
+	case "+":
+		return x + y, nil
+	case "-":
+		return x - y, nil
+	case "×":
+		return x * y, nil
+	case "÷":
+		return x / y, nil
+	default:
+		return 0, errors.New("invalid op")
+	}
 
-	return 0, nil
 }
 
 // StringEncode 引数strの長さが5以下の時キャメルケースにして返却、それ以外であればスネークケースにして返却
