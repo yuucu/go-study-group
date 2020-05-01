@@ -1,6 +1,7 @@
 package chapter2
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -75,6 +76,10 @@ func TestAdd(t *testing.T) {
 		{Value: 1},
 		{Value: 5},
 		{Value: 11},
+	}
+	fmt.Printf("models.address = %p\n", &models)
+	for i := range models {
+		fmt.Printf("model[%d].address = %p\n", i, &models[i])
 	}
 
 	t.Run("Add", func(t *testing.T) {

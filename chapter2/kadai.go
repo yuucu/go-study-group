@@ -69,7 +69,14 @@ type Model struct {
 // 与えられたスライスのModel全てのValueに5を足す破壊的な関数を作成
 func Add(models []Model) {
 	// TODO  Q4
-
+	// models自体は値渡し、中身のmodels[0]とかはkadai_testと同じ
+	fmt.Printf("models.address = %p\n", &models)
+	for i := range models {
+		fmt.Printf("model[%d].address = %p\n", i, &models[i])
+	}
+	for i := range models {
+		models[i].Value += 5
+	}
 }
 
 // 引数のスライスには重複な値が格納されているのでユニークな値のスライスに加工して返却
