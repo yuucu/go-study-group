@@ -1,5 +1,9 @@
 package chapter3
 
+import (
+	"errors"
+)
+
 type Dog struct{}
 
 func (d Dog) Bark() string {
@@ -18,5 +22,13 @@ func (c Cat) Crow() string {
 // Catの場合はCrowを実行した結果
 // その他の場合はerrorを返却してください。
 func Kadai3(x interface{}) (string, error) {
-	return "", nil
+	switch x_class := x.(type) {
+	case Dog:
+		return x_class.Bark(), nil
+	case Cat:
+		// x.(Cat).Crow(), nil
+		return x_class.Crow(), nil
+	default:
+		return "", errors.New("invalid type")
+	}
 }
