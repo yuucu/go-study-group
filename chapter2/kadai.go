@@ -49,8 +49,17 @@ func Numbers() []Number {
 // キー「yon」に関しては完全一致すること
 func CalcMap(m map[string]int) int {
 	// TODO Q3
+	_, ok := m["yon"]
+	if ok {
+		delete(m, "yon")
+	}
 
-	return 0
+	sum := 0
+	for _, v := range m {
+		sum += v
+	}
+
+	return sum
 }
 
 type Model struct {
