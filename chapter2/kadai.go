@@ -105,5 +105,11 @@ func Unique(slice []int) []int {
 func Fibonacci() func() int {
 	// TODO Q6 オプション
 
-	return nil
+	f0 := 0
+	f1 := 1
+
+	return func() int {
+		f0, f1 = f1, f0+f1
+		return f1 - f0
+	}
 }
