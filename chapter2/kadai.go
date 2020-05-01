@@ -84,6 +84,7 @@ func Add(models []Model) {
 // ex) 引数:[]slice{21,21,4,5} 戻り値:[]int{21,4,5}
 func Unique(slice []int) []int {
 	// TODO Q5
+	// たしかにmapを使った実装ならO(1)で含まれているかを確認できて良さそう
 	ret := []int{}
 	for _, v := range slice {
 		contains_flag := false
