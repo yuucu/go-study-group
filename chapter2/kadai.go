@@ -1,5 +1,7 @@
 package chapter2
 
+import "fmt"
+
 // 引数のスライスsliceの要素数が
 // 0の場合、0とエラー
 // 2以下の場合、要素を掛け算
@@ -10,8 +12,20 @@ func Calc(slice []int) (int, error) {
 	// ヒント：エラーにも色々な生成方法があるが、ここではシンプルにfmtパッケージの
 	// fmt.Errorf(“invalid op=%s”, op) などでエラー内容を返却するのがよい
 	// https://golang.org/pkg/fmt/#Errorf
-
-	return 0, nil
+	switch len(slice) {
+	case 0:
+		return 0, fmt.Errorf("slice length is 0")
+	case 1:
+		return slice[0], nil
+	case 2:
+		return slice[0] * slice[1], nil
+	default:
+		ret := 0
+		for _, v := range slice {
+			ret += v
+		}
+		return ret, nil
+	}
 }
 
 type Number struct {
@@ -22,8 +36,12 @@ type Number struct {
 // 3つの要素の中身は[{1} {2} {3}]とし、append関数を使用すること
 func Numbers() []Number {
 	// TODO Q2
+	ret := make([]Number, 0, 3)
+	for i := 1; i <= 3; i++ {
+		ret = append(ret, Number{index: i})
+	}
 
-	return nil
+	return ret
 }
 
 // 引数mをforで回し、「値」部分だけの和を返却
