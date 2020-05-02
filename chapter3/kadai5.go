@@ -1,5 +1,7 @@
 package chapter3
 
+import "encoding/json"
+
 // 課題5
 // とあるマスターデータのテーブルの構造をモデル化したstructを作りました。
 // idやnameを変更できないようにカプセル化し、Getterのみ実装しました。
@@ -19,4 +21,19 @@ func (m Master) ID() int {
 
 func (m Master) Name() string {
 	return m.name
+}
+
+func (m Master) MarshalJSON() ([]byte, error) {
+	j, err := json.Marshal(struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	}{
+		ID:   m.id,
+		Name: m.name,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return j, nil
 }
