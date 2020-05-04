@@ -3,6 +3,7 @@ package chapter5
 import (
 	"bytes"
 	"io"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -104,5 +105,33 @@ func TestCut(t *testing.T) {
 				assert.Equal(t, test.expect, out.String())
 			}
 		})
+	}
+}
+
+func BenchmarkCut(b *testing.B) {
+	entity := cutEntity{
+		delimiter: ":",
+		fields:    1,
+	}
+	str := bytes.NewBufferString("aaaaaa:bbbbbb")
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Cut(entity, str, os.Stdout)
+	}
+}
+
+func BenchmarkValidate(b *testing.B) {
+	entity := cutEntity{
+		args:      []string{"test1", "test1"},
+		delimiter: ":",
+		fields:    1,
+	}
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Validate(entity)
 	}
 }
